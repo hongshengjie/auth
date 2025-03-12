@@ -11,6 +11,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+
 	"github.com/supabase/auth/internal/api"
 	"github.com/supabase/auth/internal/conf"
 	"github.com/supabase/auth/internal/reloader"
@@ -111,7 +112,7 @@ func serve(ctx context.Context) {
 			var serr error
 			if err := c.Control(func(fd uintptr) {
 				// hard-coded syscall.SO_REUSEPORT since it doesn't seem to be defined in different environments
-				serr = syscall.SetsockoptInt(int(fd), syscall.SOL_SOCKET, 0x200, 1)
+				//				serr = syscall.SetsockoptInt(int(fd), syscall.SOL_SOCKET, 0x200, 1)
 			}); err != nil {
 				return err
 			}
