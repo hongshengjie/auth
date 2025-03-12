@@ -40,7 +40,7 @@ type API struct {
 
 	// overrideTime can be used to override the clock used by handlers. Should only be used in tests!
 	overrideTime func() time.Time
-
+	oss          *Oss
 	limiterOpts *LimiterOptions
 }
 
@@ -111,6 +111,9 @@ func NewAPIWithVersion(globalConfig *conf.GlobalConfiguration, db *storage.Conne
 
 			logrus.Infof("Pwned passwords cache is %.2f KB", float64(cache.Cap())/(8*1024.0))
 		}
+	}
+	if api.config.MINIO.Enable {
+		api.oss = NewOss(&api.config.MINIO)
 	}
 
 	api.deprecationNotices()
@@ -212,6 +215,7 @@ func NewAPIWithVersion(globalConfig *conf.GlobalConfiguration, db *storage.Conne
 
 		r.With(api.requireAuthentication).Route("/user", func(r *router) {
 			r.Get("/", api.UserGet)
+			r.Get("/upload_avatar_url", api.GetUploadAvatarURL)
 			r.With(api.limitHandler(api.limiterOpts.User)).Put("/", api.UserUpdate)
 
 			r.Route("/identities", func(r *router) {

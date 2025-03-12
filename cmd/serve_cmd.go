@@ -8,11 +8,10 @@ import (
 	"syscall"
 	"time"
 
-	"golang.org/x/sys/unix"
-
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+
 	"github.com/supabase/auth/internal/api"
 	"github.com/supabase/auth/internal/conf"
 	"github.com/supabase/auth/internal/reloader"
@@ -112,7 +111,8 @@ func serve(ctx context.Context) {
 		Control: func(network, address string, c syscall.RawConn) error {
 			var serr error
 			if err := c.Control(func(fd uintptr) {
-				serr = unix.SetsockoptInt(int(fd), unix.SOL_SOCKET, unix.SO_REUSEPORT, 1)
+				// hard-coded syscall.SO_REUSEPORT since it doesn't seem to be defined in different environments
+				//				serr = syscall.SetsockoptInt(int(fd), syscall.SOL_SOCKET, 0x200, 1)
 			}); err != nil {
 				return err
 			}
