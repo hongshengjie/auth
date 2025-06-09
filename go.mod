@@ -10,7 +10,7 @@ require (
 	github.com/didip/tollbooth/v5 v5.1.1
 	github.com/gobuffalo/validate/v3 v3.3.3 // indirect
 	github.com/gobwas/glob v0.2.3
-	github.com/gofrs/uuid v4.3.1+incompatible
+	github.com/gofrs/uuid v4.4.0+incompatible
 	github.com/jackc/pgconn v1.14.3
 	github.com/jackc/pgerrcode v0.0.0-20201024163028-a0d42d470451
 	github.com/jackc/pgproto3/v2 v2.3.3 // indirect
@@ -46,6 +46,7 @@ require (
 	github.com/gobuffalo/nulls v0.4.2 // indirect
 	github.com/goccy/go-json v0.10.3 // indirect
 	github.com/google/go-tpm v0.9.1 // indirect
+	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/invopop/yaml v0.3.1 // indirect
 	github.com/jackc/pgx/v4 v4.18.2 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
@@ -59,6 +60,7 @@ require (
 	github.com/perimeterx/marshmallow v1.1.5 // indirect
 	github.com/segmentio/asm v1.2.0 // indirect
 	github.com/speakeasy-api/openapi-overlay v0.9.0 // indirect
+	github.com/surrealdb/surrealdb.go v0.3.2 // indirect
 	github.com/vmware-labs/yaml-jsonpath v0.3.2 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f // indirect
