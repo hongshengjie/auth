@@ -278,8 +278,19 @@ type GlobalConfiguration struct {
 	MFA             MFAConfiguration         `json:"MFA"`
 	SAML            SAMLConfiguration        `json:"saml"`
 	CORS            CORSConfiguration        `json:"cors"`
+	MINIO           MinioConfiguration       `json:"minio"`
 }
 
+type MinioConfiguration struct {
+	Enable   bool   `json:"enable"`
+	Id       string `json:"id"`
+	Secret   string `json:"secret"`
+	Endpoint string `json:"endpoint"`
+	Secure   bool   `json:"secure"`
+	Region   string `json:"region"`
+	Bucket   string `json:"bucket"`
+	MaxSize  int64  `json:"maxsize"`
+}
 type CORSConfiguration struct {
 	AllowedHeaders []string `json:"allowed_headers" split_words:"true"`
 }
