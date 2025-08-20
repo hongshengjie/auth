@@ -1,11 +1,13 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
+
 	"github.com/supabase/auth/internal/api/apierrors"
 	"github.com/supabase/auth/internal/conf"
 )
@@ -27,14 +29,14 @@ func NewOss(c *conf.MinioConfiguration) *Oss {
 	o := &Oss{mini: client, c: c}
 	return o
 }
+
 func (a *API) GetUploadAvatarURL(w http.ResponseWriter, r *http.Request) error {
 	if a.oss == nil {
 		return apierrors.NewInternalServerError("oss is disable")
 	}
 	ctx := r.Context()
 	claims := getClaims(ctx)
-
-	url, err := a.oss.mini.PresignedPutObject(r.Context(), a.oss.c.Bucket, claims.Subject, time.Hour)
+	url, err := a.oss.mini.PresignedPutObject(r.Context(), a.oss.c.Bucket, claims.Subject+".jpg", time.Hour)
 	if err != nil {
 		return apierrors.NewInternalServerError("Could not get url")
 	}
